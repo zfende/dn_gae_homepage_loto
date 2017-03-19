@@ -34,21 +34,21 @@ class MainHandler(BaseHandler):
 
 class LotoHandler(BaseHandler):
     def get(self):
-        izpis_stevilk = loto_generator()
+        izpis_stevilk = self.loto_generator()
         spremenljivke = {
             "izpis_stevilk": izpis_stevilk,
         }
         return self.render_template("loto.html", spremenljivke)
 
-def loto_generator():
-    koliko_stevil = 8
-    stevila = []
-    while len(stevila) < koliko_stevil:
-        novo_stevilo = random.randrange(1, 40)
-        if not novo_stevilo in stevila:
-            stevila.append(novo_stevilo)
-    loto_stevilke = sorted(stevila)
-    return loto_stevilke
+    def loto_generator(self):
+        koliko_stevil = 8
+        stevila = []
+        while len(stevila) < koliko_stevil:
+            novo_stevilo = random.randrange(1, 40)
+            if not novo_stevilo in stevila:
+                stevila.append(novo_stevilo)
+        loto_stevilke = sorted(stevila)
+        return loto_stevilke
 
 
 app = webapp2.WSGIApplication([
